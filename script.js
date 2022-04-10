@@ -6,34 +6,57 @@ function computerPlay(){
   return options[computerChoice];
 }
 
+function playerChoice(){
+  return prompt('Please choose: rock, paper, or scissors.')
+};
 
-let computerSelection = computerPlay();
-let playerSelection = prompt('Choose: rock, paper, or scissors').toLowerCase();
 
-function playRound(x, y){
-if (x === 'rock' && y ==='paper'){
-  return 'You win! Paper beats rock!';
-} else if (x === 'paper' && y === 'rock'){
-  return 'You lose! Paper beats rock!';
-} else if (x === 'scissors' && y === "rock"){
-  return 'You win! Rock beats scissors!';
-} else if (x === 'rock' && y === 'scissors'){
-  return 'You lose! Rock beats scissors!';
-} else if (x === 'paper' && y === 'scissors'){
-  return'You win! Scissors beat paper!';
-} else if (x === 'scissors' && y === 'paper'){
-  return 'You lose! Scissors beat paper!';
-}else if (x === y){
-  return 'You tied! Try again!';
+function playRound(cs, ps){
+if (cs === 'rock' && ps ==='paper'){
+  console.log('You win! Paper beats rock!');
+  return 'win';
+} else if (cs === 'paper' && ps === 'rock'){
+  console.log('You lose! Paper beats rock!');
+  return 'lose';
+} else if (cs === 'scissors' && ps === "rock"){
+  console.log('You win! Rock beats scissors!');
+  return 'win';
+} else if (cs === 'rock' && ps === 'scissors'){
+  console.log('You lose! Rock beats scissors!');
+  return 'lose';
+} else if (cs === 'paper' && ps === 'scissors'){
+  console.log('You win! Scissors beat paper!');
+  return 'win';
+} else if (cs === 'scissors' && ps === 'paper'){
+  console.log('You lose! Scissors beat paper!');
+  return 'lose';
+}else if (cs === ps){
+  console.log('You tied! Try again!');
+  return 'tie';
 }
 }
+
+let comp = 0;
+let player = 0;
+
 
 function game(round){
-  let comp = 0;
-  let player = 0;
-  for (let i = 0; i < 3; i++){
-    console.log(round);
+  if (round === 'win'){
+    player++;
+  }else if (round === 'lose'){
+    comp++;
+  }else if (round === 'tie'){
+    return;
+  }
+  console.log(`Computer Boy has ${comp} wins, you have ${player} wins.`);
+  }
+
+
+for (let i = 0; i < 5; i++){
+  let playerSelection = playerChoice();
+  let computerSelection = computerPlay();
+  console.log(game(playRound(computerSelection, playerSelection)));
+  if(comp === 3 || player === 3){
+    break;
   }
 }
-
-console.log(game(playRound()));
