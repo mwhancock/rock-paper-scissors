@@ -1,62 +1,71 @@
+const buttons = document.querySelectorAll('[data-selection]');
+const computerScore = document.querySelector('[data-counter-comp]')
+const playerScore = document.querySelector('[data-counter-player]')
+let results = document.querySelector('h1')
+const SELECTIONS = [
+  {
+    name: 'rock',
+    beats: 'scissors'
+  },
+  {
+    name: 'paper',
+    beats: 'rock'
+  },
+  {
+    name: 'scissors',
+    beats: 'paper'
+  }
+]
 
+buttons.forEach(button => {
+  button.addEventListener('click', e => {
+    const selectionName = button.dataset.selection;
+    const selection = SELECTIONS.find(btn => btn.name === selectionName);
+    makeSelection(selection);
+  });
+});
 
-function computerPlay(){
-  const options = ['rock', 'paper', 'scissors'];
-  let computerChoice = Math.floor(Math.random() * options.length);
-  return options[computerChoice];
+function incrementScore(scoreSpan){
+  scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1;
 }
 
-function playerChoice(){
-  return prompt('Please choose: rock, paper, or scissors.')
-};
-
-
-function playRound(cs, ps){
-if (cs === 'rock' && ps ==='paper'){
-  console.log('You win! Paper beats rock!');
-  return 'win';
-} else if (cs === 'paper' && ps === 'rock'){
-  console.log('You lose! Paper beats rock!');
-  return 'lose';
-} else if (cs === 'scissors' && ps === "rock"){
-  console.log('You win! Rock beats scissors!');
-  return 'win';
-} else if (cs === 'rock' && ps === 'scissors'){
-  console.log('You lose! Rock beats scissors!');
-  return 'lose';
-} else if (cs === 'paper' && ps === 'scissors'){
-  console.log('You win! Scissors beat paper!');
-  return 'win';
-} else if (cs === 'scissors' && ps === 'paper'){
-  console.log('You lose! Scissors beat paper!');
-  return 'lose';
-}else if (cs === ps){
-  console.log('You tied! Try again!');
-  return 'tie';
-}
+function makeSelection(selection){
+  const computerChoice = computerSelection();
+  const yourWinner = isWinner(selection, computerChoice);
+  const computerWinner = isWinner(computerChoice, selection);
+  addLoss(computerChoice, computerWinner, selection);
+  addWin(selection, yourWinner, computerChoice);
+  addTie(selection, computerChoice);
+  gameEnd(computerScore, playerScore);
+  if (computerWinner) incrementScore(computerScore);
+  if (yourWinner) incrementScore(playerScore);
 }
 
-let comp = 0;
-let player = 0;
-
-
-function game(round){
-  if (round === 'win'){
-    player++;
-  }else if (round === 'lose'){
-    comp++;
-  }else if (round === 'tie'){
-    return;
+function gameEnd(cs, ps){
+  if(cs == 5){
+    results.innerText = `Computer Boy won the game, better luck next time!`
+  }else if(ps == 5){
+    results.innerText = `Congratulations, you won! `
   }
-  console.log(`Computer Boy has ${comp} wins, you have ${player} wins.`);
-  }
+}
 
+function addWin(selection, winner, opponent){
+  if (winner) results.innerText = `You win, ${selection.name} beats ${opponent.name}!`;
+}
 
-for (let i = 0; i < 5; i++){
-  let playerSelection = playerChoice();
-  let computerSelection = computerPlay();
-  console.log(game(playRound(computerSelection, playerSelection)));
-  if(comp === 3 || player === 3){
-    break;
-  }
+function addLoss(selection, winner, opponent){
+  if (winner) results.innerText = `You lose, ${selection.name} beats ${opponent.name}!`;
+}
+
+function addTie(selection, opponent){
+  if(selection === opponent) results.innerText = `You tied, try again!`;
+}
+
+function isWinner(selection, opponent){
+  return selection.beats === opponent.name;
+}
+
+function computerSelection(){
+  const computerChoice = Math.floor(Math.random() * SELECTIONS.length);
+  return SELECTIONS[computerChoice]
 }

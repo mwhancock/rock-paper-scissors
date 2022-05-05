@@ -2,9 +2,27 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="results">
+      <h1>Make Your Choice To Start The Game!</h1>
+    </div>
+    <div class="flex-container selections">
+      <button class='btn' data-selection="rock" type="button">Rock</button>
+      <button class='btn' data-selection="paper" type="button" >Paper</button>
+      <button class='btn' data-selection="scissors" type="button" >Scissors</button>
+    </div>
+    <div class="scores">
+      <div class="yourScore">
+        You: <span data-counter-player>0</span>
+      </div>
+      <div>
+        Computer Boy: <span data-counter-comp>0</span>
+      </div>
+
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

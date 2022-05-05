@@ -1,0 +1,63 @@
+/* Element Selectors */
+
+body{
+  margin: 0;
+  padding: 0;
+  background-color: aliceblue;
+  font-family: sans-serif;
+}
+
+button{
+  background-color: lightgoldenrodyellow;
+  border-style: solid;
+  border-color: khaki;
+  border-radius: 10px;
+  color: burlywood;
+  padding: 2.5% 5%;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 20px;
+  transition: 150ms;
+}
+
+button:hover{
+  background-color: burlywood;
+  border-color: darkgoldenrod;
+  color: lightgoldenrodyellow;
+  cursor: pointer;
+  transform: scale(1.12);
+}
+
+h1{
+  font-size: 2.5rem;
+}
+/* Class Selectors */
+
+.results{
+  color: burlywood;
+  margin: 10% 0;
+  text-align: center;
+}
+
+.flex-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scores{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: burlywood;
+  margin-top: 2.3rem;
+  gap: 2.5rem;
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.scores span{
+  font-weight: normal;
+  font-size: 1.4rem;
+  margin-left: 1.1rem;
+}
